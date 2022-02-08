@@ -1,4 +1,5 @@
 import React from 'react';
+import Tile from './Tile';
 
 const Board = ({board}) => {
   return <div>
@@ -6,9 +7,10 @@ const Board = ({board}) => {
         <div className = "row" key = {`row-${i}`}> 
         {row.map((tile, j) => 
 
-                <div className = "tile" key = {`tile-${i}-${j}`}> 
-                    {tile}
-                </div>
+                // <div style = {{backgroundColor: `rgb(${tile.red}, ${tile.green}, ${tile.blue})`}} className = "tile" key = {`tile-${i}-${j}`}> 
+                //     {/* {`rgb(${tile.red}, ${tile.green}, ${tile.blue})`} */}
+                // </div>
+                <Tile target = {`rgb(${tile?.target?.red}, ${tile?.target?.green}, ${tile?.target?.blue})`} color = {`rgb(${tile?.value?.red}, ${tile?.value?.green}, ${tile?.value?.blue})`} key = {`tile-${i}-${j}`}/>
         )}
         </div>
     )}
