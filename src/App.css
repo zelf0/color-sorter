@@ -12,4 +12,6 @@
   height: 50px;
 }
 
-
+.selected {
+  border: 3px solid white;
+}

@@ -8,6 +8,7 @@ function App() {
   const [board, setBoard] = useState([[1, 2, 3], [4, 5, 6], [7, 8, 9]]);
   const [height, setHeight] = useState(10);
   const [width, setWidth] = useState(10);
+  const [selected, setSelected] = useState([]);
 
   function Color(red, green, blue) {
       this.red = red;
@@ -60,34 +61,82 @@ function App() {
     //   blue:x.blue + idx * ((y.blue - x.blue) / (length - 1))
     // }
     return new Color(x.value.red + idx * ((y.value.red - x.value.red) / (length - 1)), x.value.green + idx * ((y.value.green - x.value.green) / (length - 1)), x.value.blue + idx * ((y.value.blue - x.value.blue) / (length - 1)))
-  }
+  } 
 
-  function shuffle() {
+  const shuffle = () => {
+    let newBoard = [...board];
     for (let i = 0; i < 10; i++) {
-      let newBoard = board;
-      let a = newBoard[Math.floor(Math.random() * height)][Math.floor(Math.random() * width)].value
-      let b = newBoard[Math.floor(Math.random() * height)][Math.floor(Math.random() * width)].value
-      
-      setBoard(swap(a, b, newBoard))
+      let rowOne = Math.floor(Math.random() * (height - 2)) + 1;
+      let columnOne = Math.floor(Math.random() * (width - 2)) + 1;
+      let rowTwo = Math.floor(Math.random() * (height - 2)) + 1;
+      let columnTwo = Math.floor(Math.random() * (width - 2)) + 1;
+      let temp = newBoard[rowOne][columnOne].value;
+      newBoard[rowOne][columnOne].value = newBoard[rowTwo][columnTwo].value;
+      newBoard[rowTwo][columnTwo].value = temp;
     }
+    setBoard(newBoard);
   }
 
+  const swap = (myTile) => { 
+      setSelected([...selected, myTile]);
+      console.log("swappksf", selected.length);
+      let newBoard = [...board];
+      let temp = newBoard[selected[0].index.row][selected[0].index.column].value;
+      newBoard[selected[0].index.row][selected[0].index.column].value = newBoard[myTile.index.row][myTile.index.column].value;
+      newBoard[myTile.index.row][myTile.index.column].value = temp;
+      setBoard(newBoard);
+      console.log(checkWin());
+
+  }
+
+  const checkWin = () => {
+    for (let i = 0; i < height; i++) {
+      for (let j = 0; j < width; j++) {
+        if (board[i][j].value.red !== board[i][j].target.red || board[i][j].value.green !== board[i][j].target.green || board[i][j].value.blue !== board[i][j].target.blue) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  const swapTile = (e, index) => {
+    e.target.classList.add("selected");
+    if (selected.length < 1) {
+      setSelected([...selected, {index: index, tile: e.target}]);
+    }
+    else {
+      //setSelected([...selected, {index: index, tile: e.target}]);
+      setTimeout(() => {
+        swap({index: index, tile: e.target});
+        e.target.classList.remove("selected");
+        selected[0].tile.classList.remove("selected");
+        setSelected([]);
+
+      }, 100);
+
+      // selected[0].tile.classList.remove("selected");
+      // setSelected([]);
+    }
+    console.log(e.target);
+    console.log("row ", index.row, "column ", index.column);
+  }
  
 
 
 
-  function swap(x, y, brd) {
-    let temp = x;
-    x = y;
-    y = temp;
-    return brd;
-  }
+  // function swap(x, y, brd) {
+  //   let temp = x;
+  //   x = y;
+  //   y = temp;
+  //   return brd;
+  // }
 
   return (
     <div className="App">
-        <Board board = {board}/>
+        <Board swapTile = {swapTile} board = {board}/>
         <button onClick = {createNewBoard}> New Board </button> 
-        <button onClick = {shuffle}> Shuffle </button>
+        <button onClick = {() => {shuffle()}}> Shuffle </button>
     </div>
   );
 }
