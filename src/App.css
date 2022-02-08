@@ -2,6 +2,14 @@
   text-align: center;
 }
 
+.row {
+  display: flex;
+}
+
+.tile {
+  border: 3px solid black;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
