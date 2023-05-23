@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Tile = ({color, target, swapTile, index }) => {
+const Tile = ({color, target, swapTile, index, size }) => {
 
     function handleEvent() {
         return function(e) {
@@ -8,8 +8,7 @@ const Tile = ({color, target, swapTile, index }) => {
         };
     }
    
-  return <div onClick = {handleEvent()} style = {{backgroundColor: color}} className = "tile"> 
-
+  return <div onClick = {handleEvent()} style = {{backgroundColor: color, height: size, width: size}} className = "tile"> 
 </div>};
 
 export default Tile;
