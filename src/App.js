@@ -104,16 +104,13 @@ function App() {
   const swap = (myTile) => { 
       setSelected([...selected, myTile]);
 
-
+      let newBoard = [...board];
       if (!newBoard[selected[0].index.row][selected[0].index.column].corner && !newBoard[myTile.index.row][myTile.index.column].corner) {
         let temp = newBoard[selected[0].index.row][selected[0].index.column].value;
         newBoard[selected[0].index.row][selected[0].index.column].value = newBoard[myTile.index.row][myTile.index.column].value;
         newBoard[myTile.index.row][myTile.index.column].value = temp;
       }
       setBoard(newBoard);
-      if (checkWin()) {
-          win()
-      }
       if (checkWin()) {
           win()
       }
