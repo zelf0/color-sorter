@@ -27,7 +27,6 @@ const Board = ({ board, swapTile, tileSize }) => {
       ))}
     </div>
   );
-
 };
 
 export default Board;

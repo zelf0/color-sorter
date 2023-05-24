@@ -105,12 +105,6 @@ function App() {
       setSelected([...selected, myTile]);
 
 
-      let newBoard = [...board];
-      if (!newBoard[selected[0].index.row][selected[0].index.column].corner && !newBoard[myTile.index.row][myTile.index.column].corner) {
-        let temp = newBoard[selected[0].index.row][selected[0].index.column].value;
-        newBoard[selected[0].index.row][selected[0].index.column].value = newBoard[myTile.index.row][myTile.index.column].value;
-        newBoard[myTile.index.row][myTile.index.column].value = temp;
-      }
       if (!newBoard[selected[0].index.row][selected[0].index.column].corner && !newBoard[myTile.index.row][myTile.index.column].corner) {
         let temp = newBoard[selected[0].index.row][selected[0].index.column].value;
         newBoard[selected[0].index.row][selected[0].index.column].value = newBoard[myTile.index.row][myTile.index.column].value;
@@ -166,6 +160,7 @@ function App() {
   const changeSize = (size) => {
     setHeight(size > 60 ? 60 : size);
     setWidth(size > 120 ? 120 : size);
+
   }
  
 
@@ -195,6 +190,7 @@ function App() {
         <input onChange={(e) =>  setScrambleNewBoards(e.target.checked)} checked={scrambleNewBoards} type="checkbox"id="scramble-new-boards" name="Automatically Scramble New Boards" />
         <label for="scramble-new-boards"> Automatically Scramble New Boards</label>
         </div>
+
     </div>
   );
 
