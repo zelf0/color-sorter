@@ -104,13 +104,22 @@ function App() {
   const swap = (myTile) => { 
       setSelected([...selected, myTile]);
 
+
       let newBoard = [...board];
       if (!newBoard[selected[0].index.row][selected[0].index.column].corner && !newBoard[myTile.index.row][myTile.index.column].corner) {
         let temp = newBoard[selected[0].index.row][selected[0].index.column].value;
         newBoard[selected[0].index.row][selected[0].index.column].value = newBoard[myTile.index.row][myTile.index.column].value;
         newBoard[myTile.index.row][myTile.index.column].value = temp;
       }
+      if (!newBoard[selected[0].index.row][selected[0].index.column].corner && !newBoard[myTile.index.row][myTile.index.column].corner) {
+        let temp = newBoard[selected[0].index.row][selected[0].index.column].value;
+        newBoard[selected[0].index.row][selected[0].index.column].value = newBoard[myTile.index.row][myTile.index.column].value;
+        newBoard[myTile.index.row][myTile.index.column].value = temp;
+      }
       setBoard(newBoard);
+      if (checkWin()) {
+          win()
+      }
       if (checkWin()) {
           win()
       }
@@ -172,8 +181,8 @@ function App() {
   return (
     <div className="App">
         <h3> Objective: Rearrange the tiles to form a gradient! Swap tiles to move them around the board. Corners are always locked in place and can't be moved.</h3>
-        {gameOver ? <h1> You Solved It! </h1> : <></>}
         <div className="board-container">
+        {gameOver ? <h1> You Solved It! </h1> : <></>}
           <Board tileSize={tileSize} swapTile = {swapTile} board = {board}/>
         </div>
         <button onClick = {createNewBoard}> New Board </button> 

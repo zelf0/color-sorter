@@ -33,14 +33,31 @@ button:active {
   justify-content: center;
 }
 
+input {
+  margin: 5px;
+}
+
+h1 {
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  position: absolute;
+  justify-self: center;
+  background-color: rgba(240, 240, 255, 0.6);
+  margin-top: 5%;
+  padding: 2%;
+}
+
+h3 {
+  padding: 0% 20%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 .row {
   display: flex;
 }
 
-.tile {
-  /* border: 3px solid black; */
-  /* width: 4vw;
-  height: 4vw; */
+.board-container {
+  display: flex;
+  justify-content: center;
 }
 
 .corner {

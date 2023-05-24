@@ -1,7 +1,5 @@
 import React from "react";
 import Tile from "./Tile";
-import React from "react";
-import Tile from "./Tile";
 
 const Board = ({ board, swapTile, tileSize }) => {
   return (
@@ -29,9 +27,7 @@ const Board = ({ board, swapTile, tileSize }) => {
       ))}
     </div>
   );
-      ))}
-    </div>
-  );
+
 };
 
 export default Board;
